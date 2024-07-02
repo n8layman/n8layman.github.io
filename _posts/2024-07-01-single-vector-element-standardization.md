@@ -75,17 +75,6 @@ want to apply between each element and the vector. I’m going to call the
 function `fuzzy_match` though that name may already be in use elsewhere.
 
 ``` r
-library(stringdist)
-```
-
-    ## 
-    ## Attaching package: 'stringdist'
-
-    ## The following object is masked from 'package:tidyr':
-    ## 
-    ##     extract
-
-``` r
 # This is pretty cool!
 fuzzy_match <- function(vector, element, max_dist = 0.1) {
   
@@ -215,18 +204,6 @@ how it should act and formatting our query appropriately. In R this
 involves generating a nested list.
 
 ``` r
-library(openai)
-library(jsonlite)
-```
-
-    ## 
-    ## Attaching package: 'jsonlite'
-
-    ## The following object is masked from 'package:purrr':
-    ## 
-    ##     flatten
-
-``` r
 messages <-
     list(
       list("role" = "system",
@@ -236,40 +213,15 @@ messages <-
       list("role" = "user",
            "content" = paste(outbreak_data$disease_name, collapse = ","))
       )
-
-messages
 ```
-
-    ## [[1]]
-    ## [[1]]$role
-    ## [1] "system"
-    ## 
-    ## [[1]]$content
-    ## [1] "you act as a function that standardizes a provided vector and returns a vector of equal length formated as a JSON object."
-    ## 
-    ## 
-    ## [[2]]
-    ## [[2]]$role
-    ## [1] "user"
-    ## 
-    ## [[2]]$content
-    ## [1] "The following vector contains disease names. Please alter the following disease names to remove minor errors and formatting inconsistencies and to standardize on the appropriate disease name."
-    ## 
-    ## 
-    ## [[3]]
-    ## [[3]]$role
-    ## [1] "user"
-    ## 
-    ## [[3]]$content
-    ## [1] "Influenza,Inflenza,COVID-19,sars-covid-19,Malaria,Maleria,malaria,Diabetes,Diabetis,HIV/AIDS,HIV,AIDS,Tuberculosis,Tuberclosis,Alzheimers,Alzheimers Disease,Heart Disease,Heart Diease"
 
 Now we can submit our query, extract the data from the response, and add
 a column of standardized disease names. Sometimes however, the model
-will return a malformed JSON object, or will reply as a paragraph of
-text instead of a structured object. In those cases the whole thing
-won’t work. It’s also not easy to tell the model how aggressive it
-should be in standardizing. But hey, if it doesn’t work we can always
-re-submit the query until it does!
+will return malformed JSON, or will reply as a paragraph of text instead
+of a structured object. In those cases the whole thing won’t work. It’s
+also not easy to tell the model how aggressive it should be in
+standardizing. But hey, if it doesn’t work we can always re-submit the
+query until it does!
 
 ``` r
 response <- create_chat_completion(
@@ -282,4 +234,27 @@ outbreak_data_nlp <- outbreak_data |>
            jsonlite::fromJSON() |> 
            unlist()) |> 
   select(contains("name"), everything())
+
+outbreak_data_nlp |> knitr::kable()
 ```
+
+| disease_name       | standardized_disease_name | outbreaks |
+|:-------------------|:--------------------------|----------:|
+| Influenza          | Influenza                 |        15 |
+| Inflenza           | Influenza                 |        10 |
+| COVID-19           | COVID-19                  |        95 |
+| sars-covid-19      | SARS-CoV-2                |        90 |
+| Malaria            | Malaria                   |        20 |
+| Maleria            | Malaria                   |        22 |
+| malaria            | Malaria                   |        20 |
+| Diabetes           | Diabetes                  |        30 |
+| Diabetis           | Diabetes                  |        28 |
+| HIV/AIDS           | HIV/AIDS                  |        75 |
+| HIV                | HIV/AIDS                  |        70 |
+| AIDS               | HIV/AIDS                  |        65 |
+| Tuberculosis       | Tuberculosis              |        40 |
+| Tuberclosis        | Tuberculosis              |        38 |
+| Alzheimers         | Alzheimer’s               |        23 |
+| Alzheimers Disease | Alzheimer’s               |        27 |
+| Heart Disease      | Heart Disease             |        60 |
+| Heart Diease       | Heart Disease             |        58 |
