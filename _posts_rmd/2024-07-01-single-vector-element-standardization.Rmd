@@ -148,9 +148,6 @@ messages <-
       list("role" = "user",
            "content" = paste(outbreak_data$disease_name, collapse = ","))
       )
-
-messages
-
 ```
 
 Now we can submit our query, extract the data from the response, and add a column of standardized disease names. Sometimes however, the model will return a malformed JSON object, or will reply as a paragraph of text instead of a structured object. In those cases the whole thing won't work. It's also not easy to tell the model how aggressive it should be in standardizing. But hey, if it doesn't work we can always re-submit the query until it does!
@@ -166,5 +163,6 @@ outbreak_data_nlp <- outbreak_data |>
            unlist()) |> 
   select(contains("name"), everything())
 
+outbreak_data_nlp |> knitr::kable()
 ```
 
