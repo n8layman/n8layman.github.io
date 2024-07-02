@@ -27,6 +27,9 @@ knit: >
 
 ```{r setup, include = FALSE}
 library(tidyverse)
+library(openai)
+library(jsonlite)
+library(stringdist)
 ```
 
 Standardizing data vectors is an important step in data science. For example, different data sources often represent the same entity, such as country names, in different ways or with different spellings. In addition, small errors or formatting inconsistencies can complicate joins and lead to difficulties in downstream analysis. While excellent resources do exist to solve this problem for individual use cases, such as the [countries](https://github.com/fbellelli/countries) package in R, it can be useful to understand general methods to self-standardize categorical vectors. There are three approaches that I've used to standardize character vectors. I've written scripts below to illustrate each method.
@@ -68,8 +71,6 @@ The most straight forward way to standardize a character vector is to use string
 To walk down the vector we could either use for loops or some kind of recursive function. Fortunately there is a function specifically for this kind of recursion in the purrr package, [reduce](https://blog.zhaw.ch/datascience/r-reduce-applys-lesser-known-brother/)! In order to use either approach we first need to define the function we want to apply between each element and the vector. I'm going to call the function `fuzzy_match` though that name may already be in use elsewhere.
 
 ```{r}
-library(stringdist)
-
 # This is pretty cool!
 fuzzy_match <- function(vector, element, max_dist = 0.1) {
   
@@ -136,9 +137,6 @@ choosing which model we want to use, telling the model how it should act
 and formatting our query appropriately. In R this involves generating a nested list.
 
 ``` {r}
-library(openai)
-library(jsonlite)
-
 messages <-
     list(
       list("role" = "system",
@@ -150,7 +148,7 @@ messages <-
       )
 ```
 
-Now we can submit our query, extract the data from the response, and add a column of standardized disease names. Sometimes however, the model will return a malformed JSON object, or will reply as a paragraph of text instead of a structured object. In those cases the whole thing won't work. It's also not easy to tell the model how aggressive it should be in standardizing. But hey, if it doesn't work we can always re-submit the query until it does!
+Now we can submit our query, extract the data from the response, and add a column of standardized disease names. Sometimes however, the model will return malformed JSON, or will reply as a paragraph of text instead of a structured object. In those cases the whole thing won't work. It's also not easy to tell the model how aggressive it should be in standardizing. But hey, if it doesn't work we can always re-submit the query until it does!
 ``` {r}
 response <- create_chat_completion(
     model = "gpt-3.5-turbo",
