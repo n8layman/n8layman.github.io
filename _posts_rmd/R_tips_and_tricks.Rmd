@@ -19,7 +19,7 @@ layout: post
 title: R tips and tricks
 cover-image: /assets/img/R.svg
 share-img: /assets/img/R.svg
-tags: [machine learning]
+tags: [data, R, tricks]
 ---
 ```
 
