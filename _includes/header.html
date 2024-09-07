@@ -23,6 +23,17 @@
     <div class="row">
       <div class="col-xl-8 offset-xl-2 col-lg-10 offset-lg-1">
         <div class="{{ include.type }}-heading">
+          {% if page.cover-img and page.title-box %}
+          <div style="text-align: center;">
+            <div style="display: inline-block; border: none; box-shadow: 0 0 20px 20px rgba(244, 244, 244, 0.8); padding: 20px; margin: -20px; background-color: rgba(244, 244, 244, 0.8); border-radius: 80px; color:#404040; text-shadow: none;">
+               <h1>{% if page.title %}{{ page.title | strip_html }}{% else %}<br/>{% endif %}</h1>
+               {% if page.subtitle %}
+               <hr class="small">
+              <span class="{{ include.type }}-subheading">{{ page.subtitle | strip_html }}</h2>
+              {% endif %}
+            </div>
+        </div>
+        {% else %}
           <h1>{% if page.title %}{{ page.title | strip_html }}{% else %}<br/>{% endif %}</h1>
           {% if page.subtitle %}
             {% if include.type == "page" %}
@@ -32,8 +43,9 @@
               <h2 class="{{ include.type }}-subheading">{{ page.subtitle | strip_html }}</h2>
             {% endif %}
           {% endif %}
-          
-          {% if include.type == "post" %} 
+          {% endif %}
+
+          {% if include.type == "post" %}
             {% if page.author %}
               By <strong>{{ page.author | strip_html }}</strong><br>
             {% endif%}
