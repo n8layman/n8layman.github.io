@@ -154,7 +154,7 @@ img {
 
 .navbar-custom {
   background-color: var(--navbar-col);
-  border-bottom: 1px solid var(--navbar-border-col);
+  border-bottom: 2px solid var(--navbar-border-col);
   font-family: var(--header-font);
   {% if site.navbar-img %}
     background-image: url({{ site.navbar-img | relative_url }});

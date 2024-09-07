@@ -10,7 +10,7 @@
 ############################
 
 # Name of website
-title: Computational Research
+title: n8layman
 
 # Your name to show in the footer
 author: Nate Layman
@@ -156,9 +156,9 @@ page-col: "#FFFFFF"
 text-col: "#404040"
 link-col: "#008AFF"
 hover-col: "008080" #"#0085A1"
-navbar-col: "#aab1a1" # "#959E8A"
+navbar-col: "#aebda6" #"#aab1a1" # "#959E8A"
 navbar-text-col: "#404040"
-navbar-border-col: "#777e6e"
+navbar-border-col: "#696d71" #"#777e6e"
 navbar-dropdown-col: "#EAEAEA"
 footer-col: "#EAEAEA"
 footer-text-col: "#777777"
