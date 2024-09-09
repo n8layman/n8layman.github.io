@@ -56,7 +56,7 @@ hyper-parameter tuning is handled by the **`tune_grid()`** function. The
 are some limitations, for example there isn’t an easy way to monitor
 progress. Another problem is that if one of the models stochastically
 fails it can disrupt the entire tuning process. Lastly it can be useful
-to control whether parallelization occurs, over the cross-validation
+to control whether parallelization occurs over the cross-validation
 folds, over the list of hyper-parameter sets, or a cross of both.
 
 ## Targets dynamic branching
@@ -122,7 +122,7 @@ combination by `pattern = cross(training_data_folds, bart_gridsearch)`.
       tar_target(bart_best_params, select_best_params(bart_tuned, metric = "roc_auc")),
       
 
-## tune_grid_branch
+## tune_grid_branch()
 
 Below is my implementation of a dynamic branch friendly tune_grid
 function. In addition to the benefits described above it also tracks
