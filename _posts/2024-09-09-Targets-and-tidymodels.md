@@ -26,8 +26,8 @@ hyper-parameters control *how* models learn from the data. For example
 for
 [xgboost](https://xgboost.readthedocs.io/en/stable/tutorials/model.html)
 hyperparameters include *$$\gamma$$* a regularization parameter that
-controls the cost of tree complexity and the *$$max\_depth$$* which
-limits how deep each tree can grow.
+controls the cost of tree complexity and *$$max\_depth$$* which limits
+how deep each tree can grow.
 
 Hyper-parameters must be specified prior to model fitting, but how to
 chose the best ones? This is where cross-validation comes in. By

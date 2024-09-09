@@ -46,7 +46,7 @@ At it's core machine learning is a collection of statistical and mathematical te
 
 ## Parameters vs hyper-parameters
 
-While model parameters are learned from the data during training, hyper-parameters control *how* models learn from the data. For example for [xgboost](https://xgboost.readthedocs.io/en/stable/tutorials/model.html) hyperparameters include *$$\gamma$$* a regularization parameter that controls the cost of tree complexity and the *$$max\_depth$$* which limits how deep each tree can grow.
+While model parameters are learned from the data during training, hyper-parameters control *how* models learn from the data. For example for [xgboost](https://xgboost.readthedocs.io/en/stable/tutorials/model.html) hyperparameters include *$$\gamma$$* a regularization parameter that controls the cost of tree complexity and *$$max\_depth$$* which limits how deep each tree can grow.
 
 Hyper-parameters must be specified prior to model fitting, but how to chose the best ones? This is where cross-validation comes in. By splitting the data into training, validation, and testing datasets it's possible to tune the hyper-parameters on a subset of the data and then fit and evaluate the final model performance against a hold-out data set.
 
