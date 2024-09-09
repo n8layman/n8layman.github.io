@@ -14,7 +14,7 @@ mathematical techniques to analyze and draw inferences from patterns in
 data. The way machine learning models ‘learn’ is by adjusting sets of
 parameters in order to minimize error and maximize predictive
 performance. For example, in linear regression, the parameters are the
-regression coefficients **$$\beta$$** and the intercept. For neural
+regression coefficients $$\beta$$ and the intercept. For neural
 networks, the parameters are the weights and biases of each neron. In
 tree based models, the parameters include the collection of tree
 topologies and their associated leaf weights.
@@ -25,9 +25,9 @@ While model parameters are learned from the data during training,
 hyper-parameters control *how* models learn from the data. For example
 for
 [xgboost](https://xgboost.readthedocs.io/en/stable/tutorials/model.html)
-hyperparameters include *$$\gamma$$* a regularization parameter that
-controls the cost of tree complexity and *$$max\_depth$$* which limits
-how deep each tree can grow.
+hyperparameters include $$\gamma$$ a regularization parameter that
+controls the cost of tree complexity and $$max\_depth$$ which limits how
+deep each tree can grow.
 
 Hyper-parameters must be specified prior to model fitting, but how to
 chose the best ones? This is where cross-validation comes in. By
@@ -78,10 +78,13 @@ combination.
 
 ## targets and tidymodels
 
-Below is an example targets based tidymodel pipeline. It uses two custom
-functions, **`tune_grid_branch()`** and
-\*\*`within a dynamically branched target to tune the hyper-parameters of a Bayesian Additive Regression Trees (BART) model. The key target is`bart_tuned`which is set to branch over every combination of cross-validation fold and hyper-parameter set combination by`pattern
-= cross(training_data_folds, bart_gridsearch)\`.
+Below is an example targets based tidymodels pipeline. It uses two
+custom functions, **`tune_grid_branch()`** and **`select_best_params`**,
+within a dynamically branched target to tune the hyper-parameters of a
+Bayesian Additive Regression Trees (BART) model. The key target is
+`bart_tuned` which is set to branch over every combination of
+cross-validation fold and hyper-parameter set combination via
+`pattern = cross(training_data_folds, bart_gridsearch)\`.
 
       tar_target(analysis_recipe, recipe(paste(response_variable, "~ .") |>
     as.formula(), data = analysis_data_train) |>
@@ -122,11 +125,12 @@ functions, **`tune_grid_branch()`** and
 
 ## tune_grid_branch()
 
-Below is my implementation of a dynamic branch friendly tune_grid
-function. In addition to the benefits described above it also tracks
-both fit time and the amount of memory required for each model fit.
-Using targets it’s possible to just fit a few of the models in order to
-profile your model tuning workflow. This can be accomplished by setting
+Below is my implementation of a dynamic branch friendly
+**`tune_grid()`** function. In addition to the benefits described above
+it also tracks both fit time and the amount of memory required for each
+model fit. With targets it’s also possible to just fit the first few
+fold and hyper-parameter combinations in order to profile your model
+tuning workflow. This can be accomplished by setting
 `pattern = head(cross(training_data_folds, bart_gridsearch), 5)` which
 will fit the first 5 models only. You can then get a sense of how long
 the fitting will take and how much resources each branch will require.
@@ -208,11 +212,11 @@ but at least to me it seems like a very powerful combination.
 
 ## select_best_params()
 
-And here is how you select the best set of parameters fromt the tibble
-returned by `tune_grid_branch`. This should the seamlessly fit back into
-a tidymodels pipeline for fitting the final model, extracting
-performance metrics against the hold-out test dataset, and performing
-varible importance (e.g. DALEX).
+And here is how you select the best set of parameters from the tibble
+returned by `tune_grid_branch`. This should seamlessly fit back into a
+tidymodels pipeline for fitting the final model, extracting performance
+metrics against the hold-out test dataset, and performing variable
+importance (e.g. DALEX).
 
     #' Select Best Parameters from Tuned Model Results
     #'
