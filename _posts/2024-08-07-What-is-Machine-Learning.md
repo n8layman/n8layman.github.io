@@ -9,11 +9,14 @@ tags: [machine learning]
 
 While I was visiting with my aunt the other day she asked me, “what is
 machine learning?” I was caught off guard because the term is so common
-place in my industry that I haven’t really ever had to sit down and
-define it from first principles before. I normally think about Machine
-Learning (ML) in terms of model tuning and the variance-bias trade-off,
-neither of which was of any use when talking with my aunt. Perhaps my
-favorite explanation is from [xkcd](https://xkcd.com/1838/):
+place in my work that I hadn’t really tried to explain it as simply as
+possible before. I normally think about Machine Learning (ML) as a
+collection of statistical and mathematical techniques to analyze and
+draw inferences from patterns in data. While it’s not required to be
+considered machine learning, I also almost always also think of the
+variance-bias trade-off. Neither seemed to be of much help when talking
+with my Aunt. Perhaps my favorite explanation is from
+[xkcd](https://xkcd.com/1838/):
 
 <p style="text-align:center;">
 <img src="https://imgs.xkcd.com/comics/machine_learning_2x.png" width="40%">
@@ -21,7 +24,7 @@ favorite explanation is from [xkcd](https://xkcd.com/1838/):
 
 ## The variance-bias trade-off
 
-Still the bias-variance trade-off is a good place to start. It’s an
+I think the bias-variance trade-off is a good place to start. It’s an
 important concept that describes the balance between two sources of
 error that affect model performance: bias and variance. Bias refers to
 the error introduced by simplifying assumptions made by the model,
@@ -49,12 +52,13 @@ how much data you have.**
 
 But how do we control where we land on the variance-bias trade-off? In
 short, by changing the flexibility of the model. This is often done by
-tuning the levers, switches, and dials in our model fitting method to
-ramp up or ramp down model complexity in different way hunting for the
+turning the levers, switches, and dials in our model fitting method to
+ramp up or ramp down model complexity in different ways, hunting for the
 perfect balance between bias and variance. For tree-based methods like
 boosted regression trees this could, in example, involve controlling the
-maximum tree depth. The way we identify the optimal tree depth is by
-holding back a part of our data to tune against.
+maximum tree depth. But how do we find the best level of model
+complexity? One way is by holding back a part of our data to tune
+against.
 
 ## The train-validate-test split
 
@@ -70,7 +74,7 @@ like this in tidymodels:
 </p>
 
 A downside is that we set aside parts of the data twice, reducing the
-amount of data available for training. Techniques like Cross-Validation
+amount of data available for training. Techniques like cross-balidation
 help to avoid reducing the amount of data too much by allowing all data
 points to be used for both training and validation. Instead of splitting
 off a single validation set, cross-validation partitions the data into
@@ -82,19 +86,20 @@ unduly influencing hyper-parameter selection.
 
 ## My definition
 
-And that’s it. Those are the things that make up Machine Learning. Not
-all methods tune hyper-parameters but ultimately I think of Machine
-Learning is a branch of artificial intelligence and consists of **any
-computational process that can improve both it’s answers *and it’s
-method* over time or with the addition of new data without also changing
-any programming**. Instead of following a fixed and rigid method,
-machine learning algorithms analyze data to identify patterns and use
-those patterns to improve their performance over time. In the xkcd comic
-above not only do the answers that come out of the box become refined
-(hopefully!) when you pour more data in but the organization of the pile
-improves as well. ML is a pile that stirs itself. And a good sign you’re
-dealing with an ML based approach is if you see that train-validate-test
-split.
+Not all methods require hyper-parameter tuning. Heck a simple linear
+regression technically is a type of supervised machine learning.
+Ultimately though, I think of Machine Learning as a branch of artificial
+intelligence that consists of **any computational process capable of
+improving it’s answers over time.** Instead of following a fixed and
+rigid method, machine learning algorithms analyze data to identify
+patterns and use those patterns to improve their performance. That could
+either be through the addition of more data to train on or a more
+refined set of hyper-parameters that increase the efficiency of model
+training. In the xkcd comic above not only do the answers that come out
+of the box become refined (hopefully!) when you pour more data in but it
+also becomes a pile that stirs itself. And a good sign you’re dealing
+with an ML based approach is if you see that train-validate-test split
+or hear the words ‘cross-validation’.
 
 But why would you want to use ML anyway? Definitely any time you want to
 use a complex model to predict out-of sample. When you wouldn’t want to
