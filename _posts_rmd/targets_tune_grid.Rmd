@@ -56,7 +56,7 @@ Hyper-parameter tuning is an important step in machine learning pipelines. It ge
 
 ## Tidymodels tune_grid()
 
-In the [tidymodels](https://www.tidymodels.org/) package in R, hyper-parameter tuning is handled by the **`tune_grid()`** function. The **`tune_grid()`** function can handle parallelism using the [future](https://future.futureverse.org/) package in R. However there are some limitations, for example there isn't an easy way to monitor progress. Another problem is that if one of the models stochastically fails it can disrupt the entire tuning process. Lastly it can be useful to control whether parallelization occurs, over the cross-validation folds, over the list of hyper-parameter sets, or a cross of both.
+In the [tidymodels](https://www.tidymodels.org/) package in R, hyper-parameter tuning is handled by the **`tune_grid()`** function. The **`tune_grid()`** function can handle parallelism using the [future](https://future.futureverse.org/) package in R. However there are some limitations, for example there isn't an easy way to monitor progress. Another problem is that if one of the models stochastically fails it can disrupt the entire tuning process. Lastly it can be useful to control whether parallelization occurs over the cross-validation folds, over the list of hyper-parameter sets, or a cross of both.
 
 ## Targets dynamic branching
 
@@ -105,7 +105,7 @@ as.formula(), data = analysis_data_train) |>
   
 ```
 
-## tune_grid_branch
+## tune_grid_branch()
 
 Below is my implementation of a dynamic branch friendly tune_grid function. In addition to the benefits described above it also tracks both fit time and the amount of memory required for each model fit. Using targets it's possible to just fit a few of the models in order to profile your model tuning workflow. This can be accomplished by setting `pattern = head(cross(training_data_folds, bart_gridsearch), 5)` which will fit the first 5 models only. You can then get a sense of how long the fitting will take and how much resources each branch will require. The best part is that when you're ready to do the full run you can remove the `head()` part of the command and targets _won't need to re-run those first 5 models_. I'm certain there's room to improve this but at least to me it seems like a very powerful combination.
 
