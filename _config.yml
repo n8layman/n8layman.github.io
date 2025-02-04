@@ -23,11 +23,11 @@ navbar-links:
   About Me: "aboutme"
   Resume: "Resume"
   Publications: "Pubs"
-  Projects:
-    - WAHIS-WILD Sensitivity: "https://github.com/ecohealthalliance/woah-wahis-wild-sensitivity"
-    - Automated Literature Searching: "https://github.com/ecohealthalliance/ehallm"
-    - Chat Assisted Debugging: "https://github.com/n8layman/chad"
-    - TDOA game: "https://n8-layman.shinyapps.io/tdoa/"
+  # Projects:
+  #   - WAHIS-WILD Sensitivity: "https://github.com/ecohealthalliance/woah-wahis-wild-sensitivity"
+  #   - Automated Literature Searching: "https://github.com/ecohealthalliance/ehallm"
+  #   - Chat Assisted Debugging: "https://github.com/n8layman/chad"
+  #   - TDOA game: "https://n8-layman.shinyapps.io/tdoa/"
   Resources:
     - Statistical Inference: "https://github.com/rmcelreath/stat_rethinking_2023"
     - Learn Markdown: "http://www.markdowntutorial.com/"
