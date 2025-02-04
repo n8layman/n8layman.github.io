@@ -42,11 +42,11 @@ file.remove(here::here("_posts", old_posts))
 
 ## Machine learning model parameters
 
-At it's core machine learning is a collection of statistical and mathematical techniques to analyze and draw inferences from patterns in data. The way machine learning models 'learn' is by adjusting sets of parameters in order to minimize error and maximize predictive performance. For example, in linear regression, the parameters are the regression coefficients **$$\beta$$** and the intercept. For neural networks, the parameters are the weights and biases of each neron. In tree based models, the parameters include the collection of tree topologies and their associated leaf weights.
+At it's core machine learning is a collection of statistical and mathematical techniques to analyze and draw inferences from patterns in data. The way machine learning models 'learn' is by adjusting sets of parameters in order to minimize error and maximize predictive performance. For example, in linear regression, the parameters are the regression coefficients $$\mathbf{\beta}$$ and the intercept. For neural networks, the parameters are the weights and biases of each neron. In tree based models, the parameters include the collection of tree topologies and their associated leaf weights.
 
 ## Parameters vs hyper-parameters
 
-While model parameters are learned from the data during training, hyper-parameters control *how* models learn from the data. For example for [xgboost](https://xgboost.readthedocs.io/en/stable/tutorials/model.html) hyperparameters include **$$\gamma$$** a regularization parameter that controls the cost of tree complexity and $$\textbf{max\_depth}$$ which limits how deep each tree can grow.
+While model parameters are learned from the data during training, hyper-parameters control *how* models learn from the data. For example, [xgboost](https://xgboost.readthedocs.io/en/stable/tutorials/model.html) hyperparameters include $$\mathbf{\gamma}$$ a regularization parameter that controls the cost of tree complexity and $$\mathbf{max_depth}$$ which limits how deep each tree can grow.
 
 Hyper-parameters must be specified prior to model fitting, but how to chose the best ones? This is where cross-validation comes in. By splitting the data into training, validation, and testing datasets it's possible to tune the hyper-parameters on a subset of the data and then fit and evaluate the final model performance against a hold-out data set.
 
@@ -62,7 +62,7 @@ In the [tidymodels](https://www.tidymodels.org/) package in R, hyper-parameter t
 
 Fitting a lot of models involves orchestrating many different processes - something that pipeline management tools like [targets](https://books.ropensci.org/targets/) are specifically designed to do. In targets, fitting a lot of models at once can be accomplished using [dynamic branching](https://books.ropensci.org/targets/dynamic.html). Dynamic branching sets up a subprocess for each model. Targets can track the progress of branches as they complete using **`tar_watch()`** and **`tar_poll()`** and any failed branches can be re-run after tuning completes by setting `error = "null"` within the dynamically branched target. The `pattern` argument in the target can also be used to specify how branching occurs - mapping over the cross validation folds, the hyper-parameters, or using `cross()` to fit a model to every combination.
 
-## targets and tidymodels
+## Targets and tidymodels
 
 Below is an example targets based tidymodels pipeline. It uses two custom functions, **`tune_grid_branch()`** and **`select_best_params`**, within a dynamically branched target to tune the hyper-parameters of a Bayesian Additive Regression Trees (BART) model. The key target is `bart_tuned` which is set to branch over every combination of cross-validation fold and hyper-parameter set combination via `pattern = cross(training_data_folds, bart_gridsearch)\`.
 

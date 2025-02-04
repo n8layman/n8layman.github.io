@@ -14,7 +14,7 @@ mathematical techniques to analyze and draw inferences from patterns in
 data. The way machine learning models ‘learn’ is by adjusting sets of
 parameters in order to minimize error and maximize predictive
 performance. For example, in linear regression, the parameters are the
-regression coefficients **$$\beta$$** and the intercept. For neural
+regression coefficients $$\mathbf{\beta}$$ and the intercept. For neural
 networks, the parameters are the weights and biases of each neron. In
 tree based models, the parameters include the collection of tree
 topologies and their associated leaf weights.
@@ -22,12 +22,11 @@ topologies and their associated leaf weights.
 ## Parameters vs hyper-parameters
 
 While model parameters are learned from the data during training,
-hyper-parameters control *how* models learn from the data. For example
-for
+hyper-parameters control *how* models learn from the data. For example,
 [xgboost](https://xgboost.readthedocs.io/en/stable/tutorials/model.html)
-hyperparameters include **$$\gamma$$** a regularization parameter that
-controls the cost of tree complexity and $$\textbf{max\_depth}$$ which
-limits how deep each tree can grow.
+hyperparameters include $$\mathbf{\gamma}$$ a regularization parameter
+that controls the cost of tree complexity and $$\mathbf{max_depth}$$
+which limits how deep each tree can grow.
 
 Hyper-parameters must be specified prior to model fitting, but how to
 chose the best ones? This is where cross-validation comes in. By
