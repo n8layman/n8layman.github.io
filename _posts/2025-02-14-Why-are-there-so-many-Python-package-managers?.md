@@ -36,7 +36,7 @@ environments.
 
 Virtual environments let you isolate project-specific
 dependencies from your system installation of Python. The benefits are
-1) if you accidentally screw something it won't disrupt the system Python
+1) if you accidentally screw something up it won't disrupt the system Python
 environment and 2) your projects become more reproducible.
 
 Eventually, what started as a simple attempt to set up a new project
