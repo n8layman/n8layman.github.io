@@ -31,10 +31,16 @@ Unfortunately I almost immediately ran into the following error:
     note: If you believe this is a mistake, please contact your Python installation or OS distribution provider. You can override this, at the risk of breaking your Python installation or OS, by passing --break-system-packages.
     hint: See PEP 668 for the detailed specification.
 
-Which led me down a rabbit hole of learning about virtual python
-environments. What started as a simple attempt to set up a new project
-and practice some python left me feel completely out to sea.
+Which led me down a rabbit hole of learning about Python virtual
+environments. 
 
+Virtual environments let you isolate project-specific
+dependencies from your system installation of Python. The benefits are
+1) if you accidentally screw something it won't disrupt the system Python
+environment and 2) your projects become more reproducible.
+
+Eventually, what started as a simple attempt to set up a new project
+and practice some Python left me feeling completely out to sea.
 After days of wrestling with pip, poetry, conda, pipenv, and virtualenv,
 I was left scratching my head about Python’s package management
 landscape. While choice is generally good, the sheer number of package
