@@ -2,8 +2,6 @@
 layout: post
 title: Why are there so many Python package managers?
 subtitle: Neither the forest NOR the trees
-image: /assets/img/standards.png
-cover-img: /assets/img/standards.png
 share-img: /assets/img/standards.png
 tags: [data, Python, why?]
 ---
