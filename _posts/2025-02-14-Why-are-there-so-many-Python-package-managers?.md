@@ -189,7 +189,7 @@ dependencies</td>
 </tbody>
 </table>
 
-And I’m certain I missed more than a few options.
+And I’m certain I missed more than a few.
 
 After exploring these numerous options, I settled on
 [pixi](https://github.com/prefix-dev/pixi) for my data science workflow,
