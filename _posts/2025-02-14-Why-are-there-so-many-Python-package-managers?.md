@@ -206,7 +206,7 @@ This is particularly valuable when working with packages that require
 specific system libraries or external dependencies like database
 drivers, CUDA toolkits, or specialized scientific computing libraries.
 
-The `pixi.toml` configuration seems clean and intuitive and includes for
+The `pixi.toml` configuration seems clean and intuitive and includes both
 templates and activation scripts. Most importantly, the task automation
 features let me define common data science workflows (like running
 jupyter notebooks or training models) in a way that’s easily shareable
