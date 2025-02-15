@@ -213,7 +213,7 @@ jupyter notebooks or training models) in a way that’s easily shareable
 with colleagues.
 
 While it’s true that pixi seems newer than some alternatives, it could
-help me resolving a lot of my package management needs simply and easily.
+help me resolve a lot of my package management needs simply and easily.
 And its unique ability to handle both R and Python ecosystems made it
 the clear choice for my transition to a multi-language data science
 workflow. I expect there will still be some friction but I gotta admit,
