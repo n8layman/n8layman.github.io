@@ -31,23 +31,25 @@ Unfortunately I almost immediately ran into the following error:
     note: If you believe this is a mistake, please contact your Python installation or OS distribution provider. You can override this, at the risk of breaking your Python installation or OS, by passing --break-system-packages.
     hint: See PEP 668 for the detailed specification.
 
-Which led me down a rabbit hole of learning about virtual python
-environments. What started as a simple attempt to set up a new project
-and practice some python left me feel completely out to sea.
+Which led me down a rabbit hole of learning about Python virtual
+environments. 
 
+Virtual environments let you isolate project-specific
+dependencies from your system installation of Python. The benefits are
+1) if you accidentally screw something up it won't disrupt the system Python
+environment and 2) your projects become more reproducible.
+
+Eventually, what started as a simple attempt to set up a new project
+and practice some Python left me feeling completely out to sea.
 After days of wrestling with pip, poetry, conda, pipenv, and virtualenv,
 I was left scratching my head about Python’s package management
-landscape. While choice is generally good, the sheer number of package
-managers in the Python ecosystem feels overwhelming, especially for
-newcomers. I can’t help but wonder: what the hell happened?
+landscape. I can’t help but wonder: what the hell happened?
 
-Coming from R’s relatively straightforward package management ecosystem
-with just {renv} handling most of my needs, I was overwhelmed by the
-sheer number of Python package management tools. Each seems to solve a
-different piece of the puzzle, and every blog post or tutorial I read
-seems to recommend a different approach. After spending weeks exploring
-various options and dealing with environment conflicts, I needed to make
-a choice that would work well for my data science workflow.
+Coming from R’s relatively straightforward package management ecosystem, with just {renv} handling most of my needs, I was overwhelmed by the
+sheer number of Python package management tools. While choice is generally good, each one seemed to solve a
+different piece of the puzzle, and every blog post or tutorial I read recommended a different approach. After spending what felt like weeks exploring
+various options and dealing with environment conflicts, I eventually decided I just needed to make
+a choice and pick something that would work well for my data science workflow.
 
 I mean just look at the table I made summarizing my notes!
 
@@ -183,16 +185,16 @@ dependencies</td>
 </tbody>
 </table>
 
-And I’m certain I missed more than a few options.
+And I’m certain I missed more than a few.
 
 After exploring these numerous options, I settled on
 [pixi](https://github.com/prefix-dev/pixi) for my data science workflow,
-and here’s why: As someone coming from R, I needed a tool that could
+and here’s why: I needed a tool that could
 handle both Python packages and the scientific computing dependencies
 that often come with data science work. What really sealed the deal was
-discovering that pixi can handle R packages, via conda-forge, alongside
-Python ones - which could be a game-changer for hybrid workflows where I
-might need both languages.
+discovering that pixi can handle R packages alongside Python ones - 
+which could be a game-changer for hybrid workflows where I might 
+need both languages.
 
 While conda is the traditional choice here, pixi offers a more modern
 and streamlined approach. Its `.toml` and `.lock` files ensure
@@ -204,14 +206,14 @@ This is particularly valuable when working with packages that require
 specific system libraries or external dependencies like database
 drivers, CUDA toolkits, or specialized scientific computing libraries.
 
-The `pixi.toml` configuration seems clean and intuitive and includes for
+The `pixi.toml` configuration seems clean and intuitive and includes both
 templates and activation scripts. Most importantly, the task automation
 features let me define common data science workflows (like running
 jupyter notebooks or training models) in a way that’s easily shareable
 with colleagues.
 
-While it’s true that pixi seems newer than some alternatives, its could
-help me resolving a lot of my package management needs simply and easiy.
+While it’s true that pixi seems newer than some alternatives, it could
+help me resolve a lot of my package management needs simply and easily.
 And its unique ability to handle both R and Python ecosystems made it
 the clear choice for my transition to a multi-language data science
 workflow. I expect there will still be some friction but I gotta admit,
