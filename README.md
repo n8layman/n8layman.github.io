@@ -10,17 +10,30 @@
 
 ## Table of contents
 
+- [Beautiful Jekyll](#beautiful-jekyll)
+  - [Table of contents](#table-of-contents)
 - [Features](#features)
-- [Sponsors 🏆](#sponsors)
-- [**Build your website in 3 steps**](#build-your-website-in-3-steps)
+- [Build your website in 3 steps](#build-your-website-in-3-steps)
+  - [The easy way (recommended!)](#the-easy-way-recommended)
+    - [1. Fork this project](#1-fork-this-project)
+    - [2. Rename the repository to `YOURUSERNAME.github.io`](#2-rename-the-repository-to-yourusernamegithubio)
+    - [3. Customize your website settings](#3-customize-your-website-settings)
+    - [4. Congratulations! You have a website!](#4-congratulations-you-have-a-website)
+  - [The harder way (for advanced users)](#the-harder-way-for-advanced-users)
 - [Plans](#plans)
 - [Add your own content](#add-your-own-content)
 - [Customizing parameters for each page](#customizing-parameters-for-each-page)
 - [Supported parameters](#supported-parameters)
+  - [Main parameters](#main-parameters)
+  - [Parameters for SEO and social media sharing](#parameters-for-seo-and-social-media-sharing)
+  - [Less commonly used parameters](#less-commonly-used-parameters)
+  - [Advanced parameters](#advanced-parameters)
+  - [Page types](#page-types)
 - [Featured users (success stories!)](#featured-users-success-stories)
 - [Next steps](#next-steps)
 - [Getting help](#getting-help)
-- [Credits and contributions](#contributions)
+- [Contributions](#contributions)
+- [Credits](#credits)
 
 # Features
 
@@ -97,7 +110,7 @@ Beautiful Jekyll is, and always will be, free. But if you want to remove the Bea
 
 To add pages to your site, you can either write a markdown file (`.md`) or you can write an HTML file. It's much easier to write markdown than HTML, so that's the recommended approach ([here's a great tutorial](https://markdowntutorial.com/) if you need to learn markdown in 5 minutes).
 
-To see an example of a markdown file, click on any file that ends in `.md`, for example [`aboutme.md`](Aboutme.md). On that page you can see some nicely formatted text (there's a word in bold, a link, a few bullet points), and if you click on the pencil icon to edit the file, you'll see the markdown code that generated the pretty text. Very easy! 
+To see an example of a markdown file, click on any file that ends in `.md`, for example [`aboutme.md`](aboutme.md). On that page you can see some nicely formatted text (there's a word in bold, a link, a few bullet points), and if you click on the pencil icon to edit the file, you'll see the markdown code that generated the pretty text. Very easy! 
 
 In contrast, look at [`tags.html`](./tags.html). That's how your write HTML - not as pretty. So stick with markdown if you don't know HTML.
 

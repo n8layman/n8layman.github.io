@@ -20,10 +20,10 @@ author: Nathan Layman
 ###############################################
 
 navbar-links:
-  About Me: "Aboutme"
-  Resume: "Resume"
-  Publications: "Pubs"
-  Blog: "Blog"
+  About Me: "aboutme"
+  Resume: "resume"
+  Publications: "pubs"
+  Blog: "blog"
   # Projects:
   #   - WAHIS-WILD Sensitivity: "https://github.com/ecohealthalliance/woah-wahis-wild-sensitivity"
   #   - Automated Literature Searching: "https://github.com/ecohealthalliance/ehallm"
