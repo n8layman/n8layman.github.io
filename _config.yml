@@ -70,7 +70,7 @@ scholar:
 # Uncomment the links you want to show and add your information to each one.
 social-network-links:
   email: "n8.layman@gmail.com"
-  rss: false  # remove this line if you don't want to show an RSS link at the bottom
+  rss: true  # remove this line if you don't want to show an RSS link at the bottom
   # facebook: deanattali
   github: n8layman
   # twitter: daattali
@@ -157,7 +157,7 @@ page-col: "#FFFFFF"
 text-col: "#404040"
 link-col: "#008AFF"
 hover-col: "008080" #"#0085A1"
-navbar-col: "#aebda6" #"#aab1a1" # "#959E8A"
+navbar-col: "#FFFFFF" #"#aebda6" #"#aab1a1" # "#959E8A"
 navbar-text-col: "#404040"
 navbar-border-col: "#696d71" #"#777e6e"
 navbar-dropdown-col: "#EAEAEA"
