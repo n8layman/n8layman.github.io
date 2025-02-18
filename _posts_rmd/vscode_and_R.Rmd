@@ -1,0 +1,98 @@
+---
+title: "VScode and R"
+author: "Nathan Layman"
+date: "`r Sys.Date()`"
+output:
+  md_document:
+    variant: gfm
+knit: >
+  (function(input_file, encoding) {
+    metadata <- rmarkdown::yaml_front_matter(input_file)
+    output_file = paste0("_posts/", Sys.Date(), "-", gsub(" ", "-", metadata$title), ".md")
+    rmarkdown::render(input = input_file, output_file = xfun::from_root(output_file))
+  })
+---
+
+```{=html}
+---
+layout: post
+title: VScode and R
+subtitle:
+cover-img: 
+share-img: 
+tags: [VScode, R, git]
+---
+```
+
+I recently tried switching from managing my R projects with RStudio to VScode. The switch was motivated by a desire to improve my interaction with git and github. VScode has some very elegant methods to view the commit graph, visualize and resolve merge conflicts, view issues, and create pull requests right from within the IDE. RStudio's github integration feels much less mature - even clunky. This post is a way to capture and share some of the steps necessay to get things going, some of the challenges I ran into along the way and the solutions I found, and some of the exciting things that switching to VScode makes possible.
+
+## Why go to the trouble?
+
+### Benefits
+
+### Costs
+
+## Pre-game
+
+### Installing R on mac os
+
+Installing R via homebrew:
+`brew install r`
+vs
+`brew install --cask r`
+
+### Installing radian
+
+#### Python
+
+##### Pipx
+
+##### Pixi
+
+#### radian
+`pipx install radian`
+
+## Game day
+
+### Installig VScode
+
+### How to set VScode settings
+
+#### Global vs Workspace environments and settings
+
+### Extensions
+
+1. Project manager
+2. R Extensions
+3. github
+  - Git History
+  - Git Actions
+  - Git Codespaces
+  - Git graph
+  - Github pull requests
+  - Github theme
+  - Gitlens
+4. quarto
+5. Prettier
+
+
+### setting up radian
+1. click to move cursor
+
+### languageserver
+
+### httpgd
+
+### quarto
+
+## Problems
+
+I encountered several problems and things I'm hoping will get resolved
+
+1. renv / radian bug
+2. quarto preview bullets not lining up with checkboxes
+3. Goto definitions (R.lsp)
+  - remember you need to first source the files to make this work. Consider adding to .RProfile
+
+
+
