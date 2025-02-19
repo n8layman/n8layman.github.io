@@ -24,75 +24,242 @@ tags: [VScode, R, git]
 ---
 ```
 
-I recently tried switching from managing my R projects with RStudio to VScode. The switch was motivated by a desire to improve my interaction with git and github. VScode has some very elegant methods to view the commit graph, visualize and resolve merge conflicts, view issues, and create pull requests right from within the IDE. RStudio's github integration feels much less mature - even clunky. This post is a way to capture and share some of the steps necessay to get things going, some of the challenges I ran into along the way and the solutions I found, and some of the exciting things that switching to VScode makes possible.
-
-## Why go to the trouble?
+I recently tried switching from managing my R projects with RStudio to VScode. The switch was motivated by a desire to improve my interaction with git and github. VScode has some very elegant methods to view the commit graph, visualize and resolve merge conflicts, view issues, and create pull requests right from within the IDE. RStudio's github integration feels much less mature - even clunky. This post is a way to capture and share the steps necessay to get things going, some of the challenges I ran into along the way and the solutions I found as well as some of the exciting features that come with switching to VScode.
 
 ### Benefits
+The switch to VScode brings several compelling advantages:
+
+Superior Git Integration: Beyond basic version control, VScode offers advanced features like:
+
+1. Interactive commit graph visualization
+2. Built-in merge conflict resolution tools
+3. Integrated GitHub issue tracking
+4. Pull request management within the IDE
+5. Detailed file history and blame annotations through GitLens
+6. Line-specific code suggestions, reviews, and comments
+7. Live share
+
+
+Extensibility: VScode's marketplace offers thousands of extensions that can enhance your R development experience, from themes to productivity tools.
+Multi-language Support: If you work with multiple programming languages, VScode provides a consistent interface across all of them, reducing context switching.
+Performance: VScode generally feels more responsive than RStudio, especially when working with large projects or multiple files.
+Modern Interface: The UI is clean, customizable, and supports modern features like split editors, integrated terminals, and customizable layouts.
 
 ### Costs
+There are some trade-offs to consider:
+
+1. Initial Setup Time: Getting everything configured properly takes more time than RStudio's out-of-the-box experience.
+2. Learning Curve: You'll need to learn new keyboard shortcuts and workflows, which can temporarily slow you down.
+3. Missing Features: Some RStudio-specific features might not be available or work differently:
+  - The environment pane works differently
+  - Package management is less integrated
+  - Some Shiny features require additional setup
+4. Configuration Management: You'll need to maintain your own settings and extensions, which requires more active management than RStudio.
 
 ## Pre-game
 
-### Installing R on mac os
+### Installing R (mac OS)
 
-Installing R via homebrew:
-`brew install r`
-vs
-`brew install --cask r`
+**Using `brew install --cask r`**
+- Installs R as a cask (pre-built binary)
+- More similar to the experience of downloading from CRAN
+- This is the only one that allows package binaries to be downloaded from CRAN
+- Includes R.app (GUI version)
+- May be easier for beginners
+
+**Using `brew install r`** (NOT RECOMMENDED!)
+- Installs R as a formula
+- Provides more control over the installation
+- Better integration with other Homebrew packages
+- Easier to update and manage dependencies
+- Packages must be built from source
+
+Note: The formula installation (`brew install --cask r`) is highly recommended because it allows package binaries to be downloaded from CRAN.
+
 
 ### Installing radian
 
-#### Python
+Radian is a modern R console with syntax highlighting and multi-line editing. It's a significant improvement over the default R console.
+BUT! Before radian is a **Python** based application! You need a Python environment. 
 
-##### Pipx
+#### First install python:
+`brew install python`
 
-##### Pixi
+#### Now install and use a python application manager:
+`brew install Pipx`
 
-#### radian
-`pipx install radian`
+#### Finally install radian
+```
+pipx install radian
+which radian
+```
 
 ## Game day
 
-### Installig VScode
+### Download VScode from the official website or use Homebrew:
 
-### How to set VScode settings
+```bash
+brew install --cask visual-studio-code
+```
+
+### VScode settings
+
+VScode uses a hierarchical settings system that can be configured at different levels.
 
 #### Global vs Workspace environments and settings
 
+Global settings affect all VScode projects, while workspace settings override global settings for specific projects. Settings can be managed through the UI or by editing JSON files. It's recommended to start with global settings and create workspace-specific overrides as needed.
+
 ### Extensions
 
-1. Project manager
-2. R Extensions
-3. github
-  - Git History
-  - Git Actions
-  - Git Codespaces
-  - Git graph
-  - Github pull requests
-  - Github theme
-  - Gitlens
-4. quarto
-5. Prettier
+Essential extensions for R development:
 
+**Project manager**
+- Helps organize and switch between projects
+- Saves project-specific settings
+- Supports custom project templates
 
-### setting up radian
-1. click to move cursor
+**R Extensions**
+- R Language Support
+- R Debugger
+- R LSP Client
+
+**GitHub Integration**
+- Git History: Visualize repository history
+- Git Actions: Manage GitHub Actions workflows
+- Git Codespaces: Remote development environments
+- Git Graph: Interactive visualization of git history
+- GitHub Pull Requests: Manage PRs from VScode
+- GitHub Theme: Official GitHub color themes
+- GitLens: Enhanced git capabilities
+
+**Quarto**
+- Essential for R Markdown users
+- Supports interactive previews
+- Handles rendering and export
+
+**Prettier**
+- Code formatting for multiple languages
+- Ensures consistent style
+- Configurable formatting rules
+
+### renv
+
+It is highly recommended to use package management when working on R code. Renv allows for project libraries which make it much easier to avoid conflicts.
+
+![image](https://rstudio.github.io/renv/articles/renv.png)
+
+### Install renv
+```R
+install.packages("renv")
+renv::init()  # Initialize project
+```
+
+#### Use [renv](https://rstudio.github.io/renv/articles/renv.html)
+
+First activate your project using `renv::activate()`. Make sure 
+
+From now on:
+- install regular packages via `renv::install('package')`
+- install github packages via `renv::install('user/repo')`
+
+For example, to install the development version of ggplot use:
+```
+renv::install('tidyverse/ggplot2')
+```
 
 ### languageserver
+The R language server provides code intelligence:
+
+```R
+renv::install("languageserver")
+```
+
+In order for some features, such as function hover information and goto defintion to index files in the `R/` folder, the project needs a DESCRIPTION file.
+
+#### Create DESCRIPTION file
+```
+renv::install('usethis')
+usethis::use_description(check_name = F)
+```
+
+### linting
+Configure linting rules in `.lintr`:
+
+```R
+linters: linters_with_defaults(line_length_linter=NULL)
+```
 
 ### httpgd
 
+1. `renv::install("nx10/unigd")`
+2. `renv::install("nx10/httpgd")`
+
 ### quarto
+Quarto provides enhanced document processing capabilities and requires separate installation and configuration.
+
+### .RProfile
+
+
+```
+if (interactive() && Sys.getenv("TERM_PROGRAM") == "vscode") {
+
+  library(languageserver) # Needed to make function definition goto work
+
+  options(vsc.dev.args = list(
+    width = 1500,
+    height = 1500,
+    pointsize = 12,
+    res = 300
+  ))
+
+
+  if (requireNamespace("httpgd", quietly = TRUE)) {
+    options(vsc.plot = FALSE)
+    options(device = function(...) {
+      httpgd::hgd(silent = TRUE)
+      .vsc.browser(httpgd::hgd_url(history = FALSE), viewer = "Beside")
+    })
+  }
+```
+
+### VScode keybindings
+
+Consider creating custom keybindings for:
+- Running code selections
+- Starting/stopping R sessions
+- Managing plots
+- Navigating between files
+- Git operations
 
 ## Problems
+Current issues and potential solutions:
 
-I encountered several problems and things I'm hoping will get resolved
+**renv/radian integration bug**
+```
+ *** caught bus error ***
+address 0x1013065e8, cause 'invalid alignment'
+```
+- Issue being tracked in the renv repository
+- Current solution is to re-build the entire renv project library.
+  1. Delete renv.lock
+  2. Delete workspace renv folder
+  3. `install.packages('renv')`
+  4. `renv::snapshot()`
+  5. `renv::hydrate()`
+    - Chose: `Activate the project and use the project library.`
+  6. Close R terminal and open a new one
+  7. `renv::snapshot()`
+    - Chose: `2: Install the packages, then snapshot.`
+  8. Repeat steps until `renv::status` returns `No issues found -- the project is in a consistent state.`
+  9. Make sure to install any missing packages not tracked by renv such as:
+    - `renv::install('languageserver')`
 
-1. renv / radian bug
-2. quarto preview bullets not lining up with checkboxes
-3. Goto definitions (R.lsp)
-  - remember you need to first source the files to make this work. Consider adding to .RProfile
+**Quarto preview formatting**
+- Bullet alignment issues with checkboxes
+- Issue being tracked in the renv repository
 
+**Go to definition functionality**
+- Requires sourcing files or DESCRIPTION file
 
-
+Future updates to the R extension and language server should address many of these issues.
